@@ -2,14 +2,25 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:unsplash_app/data/api_base.dart';
 import 'package:unsplash_app/models/photos_model.dart';
+import 'package:unsplash_app/models/user_profile_model.dart';
 
 class ApiData extends ApiBase {
+  String mePath = 'me';
   String photosPath = 'photos';
   String searchPath = 'search';
 
   ApiData({String defaultUrl, HttpClient client})
       : super(defaultUrl: defaultUrl, client: client);
 
+  Future<UserProfile> getMe() async {
+    Uri uri = createUri(defaultUrl,
+        '/$mePath');
+
+    final response = await get(uri);
+    final result =
+    UserProfile.fromJson(json.decode(response.body));
+    return result;
+  }
   Future<List<Photos>> getPhotos(int page, {pageSize: 20}) async {
     Uri uri = createUri(defaultUrl, '/$photosPath', {
       'page': page.toString(),
