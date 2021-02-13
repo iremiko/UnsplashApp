@@ -33,7 +33,7 @@ abstract class ApiBase {
       body: postBody,
       headers: {
         HttpHeaders.acceptHeader: 'application/json',
-        HttpHeaders.authorizationHeader: 'Client-ID ${constants.clientId}'
+        HttpHeaders.authorizationHeader: 'Bearer ${constants.accessToken}'
       },
     ).timeout(Duration(seconds: 20));
 
@@ -48,7 +48,7 @@ abstract class ApiBase {
     log.info(uri.toString());
     final response = await client.get(uri, headers: {
       HttpHeaders.acceptHeader: 'application/json',
-      HttpHeaders.authorizationHeader: 'Client-ID ${constants.clientId}'
+      HttpHeaders.authorizationHeader: 'Bearer ${constants.accessToken}'
     }).timeout(Duration(seconds: 20));
 
     if (response.statusCode == 200) {

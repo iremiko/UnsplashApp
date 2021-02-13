@@ -1,2 +1,2 @@
 const String defaultUrl = 'api.unsplash.com';
-const String clientId = '';
+const String accessToken = '';
