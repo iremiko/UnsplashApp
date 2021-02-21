@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:unsplash_app/common/list_item.dart';
 import 'package:unsplash_app/models/photos_model.dart';
+import 'package:unsplash_app/pages/photos/detail/photo_detail_page.dart';
 import 'package:unsplash_app/pages/photos/photo_list_bloc.dart';
 import 'package:unsplash_app/pages/photos/photo_list_item_view.dart';
 
@@ -84,9 +85,17 @@ class _PhotoListState extends State<PhotoList> {
   }
 
   Widget _buildItem(Photos photos) {
-    return CachedNetworkImage(
-      imageUrl: '${photos.photosUrl.regular?? ''}',
-      fit: BoxFit.cover,
+    return GestureDetector(
+      onTap: ()=>   Navigator.of(context).push(
+        MaterialPageRoute(
+            builder: (_) => PhotoDetailPage(
+             photoId: photos.id,)
+        ),
+      ),
+      child: CachedNetworkImage(
+        imageUrl: '${photos.photosUrl.regular?? ''}',
+        fit: BoxFit.cover,
+      ),
     );
   }
 }
